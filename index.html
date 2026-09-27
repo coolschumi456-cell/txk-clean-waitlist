@@ -16,10 +16,10 @@ button{padding:10px 16px;border:0;border-radius:6px;background:var(--accent);col
 <tr><td>品質報告</td><td>每日根數、缺分鐘清單、換月標記、原始檔 sha256——每個數字可回溯</td></tr>
 <tr><td>目前狀態</td><td>樣本 5 個交易日（2026-09-18～09-24）已通過獨立覆核；每日自動更新與跨換月銜接<b>尚在驗證</b></td></tr></table>
 <p class="muted">不做的事：不推薦標的、不提供訊號、不保證獲利。這是資料，不是建議。</p>
-<form id="wl" onsubmit="return go(event)"><input id="c" name="contact" placeholder="等候名單尚未開放（籌備中）" maxlength="120" disabled><button disabled>等候名單籌備中</button></form>
+<form id="wl" onsubmit="return go(event)"><input id="c" name="contact" placeholder="Email 或 Telegram（只用來在開放時通知，不寄行銷）" maxlength="120" required><button>加入等候名單</button></form>
 <p id="msg" class="ok"></p>
-<p class="note">籌備中：不報價、不收款、不寄行銷、不主動聯絡。等候名單開放後才會收聯絡方式，且只存在本公司機器。</p>
+<p class="note">免費等候名單：不報價、不收款、不寄行銷。聯絡方式只存在本公司機器（不經第三方服務）；資料集開放時通知一次，其餘不主動聯絡。</p>
 <script>async function go(e){e.preventDefault();const c=document.getElementById('c').value.trim();const m=document.getElementById('msg');
 try{const r=await fetch('https://schumimacbook-air.tailfa8259.ts.net/api/waitlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({candidate:'TXK-CLEAN-001',contact:c})});
-const j=await r.json();m.textContent=j.ok?'已加入，開放時通知你一次。':('沒送出：'+(j.error||r.status));}catch(err){m.textContent='沒送出：連線失敗';}return false;}</script>
+const j=await r.json();m.textContent=j.ok?'已加入等候名單。':('沒送出：'+(j.error||r.status));}catch(err){m.textContent='沒送出：連線失敗';}return false;}</script>
 </main></body></html>
