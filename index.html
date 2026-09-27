@@ -1,0 +1,25 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台指期乾淨分鐘 K｜等候名單</title>
+<style>:root{--bg:#F7F2E7;--ink:#1A1712;--muted:#5A5346;--line:#DCD4C4;--accent:#8A6A14}
+@media(prefers-color-scheme:dark){:root{--bg:#0b0e12;--ink:#f3efe6;--muted:#b5ad9e;--line:#2a2f37;--accent:#d4b04a}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,"Noto Sans TC",sans-serif}
+main{max-width:640px;margin:0 auto;padding:40px 16px}h1{font-size:1.7em;line-height:1.25;margin:.2em 0}
+.muted{color:var(--muted)}table{border-collapse:collapse;width:100%;font-size:.92em}td,th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left}
+form{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap}input{flex:1;min-width:220px;padding:10px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--ink)}
+button{padding:10px 16px;border:0;border-radius:6px;background:var(--accent);color:#fff;font-weight:600}
+.ok{color:var(--accent)}.note{font-size:.85em;color:var(--muted);margin-top:24px}</style></head><body><main>
+<p class="muted">鍛流｜資料工具（籌備中，免費等候名單）</p>
+<h1>台指期分鐘 K，已經幫你把期交所的每筆成交檔清乾淨</h1>
+<p>期交所免費提供每日「每筆成交資料」，但它是 Big5 逐筆檔：要自己合成 1 分 K、補齊缺分鐘、處理換月。多數人卡在這裡就放棄回測。這個資料集每天自動產出：</p>
+<table><tr><th>你拿到</th><th>說明</th></tr>
+<tr><td>1 分／5 分 K</td><td>日盤 08:45–13:45、前月契約；5 分 K 由 1 分 K 機械聚合，不插值</td></tr>
+<tr><td>品質報告</td><td>每日根數、缺分鐘清單、換月標記、原始檔 sha256——每個數字可回溯</td></tr>
+<tr><td>更新</td><td>每個交易日盤後自動；樣本附 5 個交易日</td></tr></table>
+<p class="muted">不做的事：不推薦標的、不提供訊號、不保證獲利。這是資料，不是建議。</p>
+<form id="wl" onsubmit="return go(event)"><input id="c" name="contact" placeholder="Email 或 Telegram（只用來通知開放，不寄行銷）" maxlength="120" required><button>加入等候名單</button></form>
+<p id="msg" class="ok"></p>
+<p class="note">目前為籌備中的免費等候名單：不報價、不收款、不寄行銷。留下的聯絡方式只存在本公司機器，開放時通知一次。</p>
+<script>async function go(e){e.preventDefault();const c=document.getElementById('c').value.trim();const m=document.getElementById('msg');
+try{const r=await fetch('https://schumimacbook-air.tailfa8259.ts.net/api/waitlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({candidate:'TXK-CLEAN-001',contact:c})});
+const j=await r.json();m.textContent=j.ok?'已加入，開放時通知你一次。':('沒送出：'+(j.error||r.status));}catch(err){m.textContent='沒送出：連線失敗';}return false;}</script>
+</main></body></html>
